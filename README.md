@@ -11,6 +11,7 @@ _____
 3. [] Write test specs for Posts
 4. [] Implement User Authentication and Authorization
 5. [] Implement Post CRUD
+6. [] Setup Rules for data (e.g. length of password, valid email format etc. for users)
 
 ## Setup
 
@@ -18,6 +19,8 @@ _____
 
 Create a **.env** file at the root of the app and add
 ```process.env.DATABASE_URL = "your database path"```
+
+Inside the database path replace ```".mongodb.net/test"``` with ```".mongodb.net/name_of_your_database"```
 
 Make sure your ip is whitelisted inside Atlas or use ```0.0.0.0/0``` to whitelist all connections
 

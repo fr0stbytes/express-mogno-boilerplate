@@ -9,3 +9,7 @@ describe('Get Users Listsings', () => {
     // .expect()
   })
 })
+
+// User should be unique (not use same email to register users)
+// CRUD operations can only be performed by logged in users 
+// CRUD operations can only be performed by users with admin role
