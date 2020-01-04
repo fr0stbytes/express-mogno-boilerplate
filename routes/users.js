@@ -3,6 +3,9 @@ var router = express.Router()
 
 var User = require('../models/user')
 
+const bcrypt = require('bcrypt')
+const saltRounds = 10
+
 /* GET ALL USERS */
 router.get('/', async (req, res, next) => {
   try {
@@ -20,19 +23,21 @@ router.get('/:id', getUser, (req, res, next) => {
 
 /*CREATE ONE USER*/
 router.post('/', async (req, res, next) => {
-   const user = new User({
-     name: req.body.name,
-     email: req.body.email,
-     // TODO: hash password
-     password: req.body.password
-   })
-   try {
-     const newUser = await user.save()
-     res.status(201).json(user)
-   } catch (err) {
-     //fail due to bad data
-     res.status(400).json({message: err.message})
-   }
+  bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+    const user = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: hash
+    })
+    try {
+      const newUser = user.save()
+      res.status(201).json(user)
+    } catch (err) {
+      //fail due to bad data
+      res.status(400).json({message: err.message})
+    }
+  })
+
 })
 
 /* UPDATE ONE USER*/
